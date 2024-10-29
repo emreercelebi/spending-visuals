@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { getSpendingData } from './sheets';
 
 function App() {
-  getSpendingData();
+  const [ data, setData ] = useState(null);
+
+  useEffect(() => {
+    if (!data) {
+      getSpendingData().then(res => setData(res))
+    }
+  }, [data]);
+
   return (
     <div className="App">
       <header className="App-header">
