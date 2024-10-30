@@ -1,0 +1,19 @@
+.Table
+{
+  &-headers
+  {
+    display: flex;
+  }
+
+  &-header
+  {
+    width: 25%;
+  }
+
+  &-data
+  {
+    border: 1px solid $gray-2;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+}

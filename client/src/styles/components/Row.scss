@@ -1,0 +1,13 @@
+.Row
+{
+  &--shaded
+  {
+    background-color: $gray-1;
+  }
+
+  &-cell
+  {
+    border: 1px solid $gray-2;
+    width: 25%;
+  }
+}

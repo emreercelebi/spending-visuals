@@ -6,7 +6,7 @@ interface TableProps  {
 
 export function Table({rows}: Readonly<TableProps>) {
   console.log('table', rows);
-  const headers = rows[0];
+  const headers = rows[0].slice(1);
   return (
     <div className="Table">
       <div className="Table-headers">
@@ -16,11 +16,11 @@ export function Table({rows}: Readonly<TableProps>) {
           </div>
         ))}
       </div>
-      <div className="Table-data">
-        {rows?.map((row, i) => (
-          i > 0 && <Row row={row} />
+      <table className="Table-data">
+        {rows.slice(1).map(row => (
+          <Row row={row} shaded={(parseInt(row[0])) % 2 == 1} key={row[0]}/>
         ))}
-      </div>
+      </table>
     </div>
   )
 }

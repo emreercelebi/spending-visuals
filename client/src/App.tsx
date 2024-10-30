@@ -28,7 +28,9 @@ function App() {
 
   return (
     <div className="App">
-      {data && <Table rows={data[currentMonth]['data']['values']} />}
+      <div className="App-container">
+        {data && <Table rows={data[currentMonth]['data']['values']} />}
+      </div>
     </div>
   );
 }

@@ -1,16 +1,17 @@
 
 interface RowProps {
   row: string[]
+  shaded: boolean;
 }
 
-export function Row({ row }: RowProps) {
+export function Row({ row, shaded }: Readonly<RowProps>) {
   return (
-    <div className="Row">
-      {row.map(cell => (
-        <div className="Row-cell" key={cell}>
+    <tr className={`Row${shaded ? ' Row--shaded' : ''}`}>
+      {row.slice(1).map(cell => (
+        <td className="Row-cell" key={cell}>
           {cell}
-        </div>
+        </td>
       ))}
-    </div>
+    </tr>
   )
 }
