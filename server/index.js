@@ -38,7 +38,7 @@ async function getSheetsData(sheetName) {
 
   const data = await sheet.spreadsheets.values.get({
     spreadsheetId: authData.spreadsheetId,
-    range: `${sheetName}!A1:D100`,
+    range: `${sheetName}!A1:E100`,
     auth,
   });
 
