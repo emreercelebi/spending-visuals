@@ -19,7 +19,7 @@ function App() {
     <div className="App">
       <div className="App-container">
         {data && <MonthSelect months={months} currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} />}
-        {data && <Table rows={data[currentMonth]['data']['values']} />}
+        {data && <Table rows={data[currentMonth]['values']} />}
       </div>
     </div>
   );

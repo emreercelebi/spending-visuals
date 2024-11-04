@@ -5,7 +5,6 @@ interface TableProps  {
 }
 
 export function Table({rows}: Readonly<TableProps>) {
-  console.log('table', rows);
   const headers = rows[0].slice(1);
   return (
     <div className="Table">

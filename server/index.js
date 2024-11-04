@@ -5,7 +5,7 @@ const { google }  = require('googleapis')
 const authData = require('./credentials')
 app.use(cors())
 
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const months = ['Sep', 'Oct', 'Nov'];
 
 app.listen(8080, () => {
       console.log('server listening on port 8080')
@@ -13,18 +13,11 @@ app.listen(8080, () => {
 
 app.get('/year/:year', async (req, res) => {
   const year = req.params.year;
-  const data = {};
-
-  await Promise.all(months.map(month => {
-    const getMonthData = async (data, month, year) => {
-      data[month] = await getSheetsData(`${month} ${year}`);
-    }
-    return getMonthData(data, month, year);
-  }))
+  const data = await getSheetsData(year);
   res.send(data);
 })
 
-async function getSheetsData(sheetName) {
+async function getSheetsData(year) {
   const { private_key, client_email } = authData.credentials;
 
   const auth = new google.auth.JWT({
@@ -36,13 +29,16 @@ async function getSheetsData(sheetName) {
 
   let data = null;
   try {
-    data = await sheet.spreadsheets.values.get({
+    const response = await sheet.spreadsheets.values.batchGet({
       spreadsheetId: authData.spreadsheetId,
-      range: `${sheetName}!A1:E100`,
+      ranges: months.map(month => `${month} ${year}!A1:E100`),
       auth,
     });
+
+    data = {};
+    months.forEach((month, i) => data[month] = response.data.valueRanges[i]);
   } catch (e) {
-    console.log(`Invalid sheet: ${sheetName}`)
+    console.log(`error in fetching sheets: ${e}`)
   }
   return data;
 }
