@@ -5,9 +5,7 @@ const { google }  = require('googleapis')
 const authData = require('./credentials')
 app.use(cors())
 
-// const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const months = ['Sep','Oct'];
-
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 app.listen(8080, () => {
       console.log('server listening on port 8080')
@@ -36,11 +34,15 @@ async function getSheetsData(sheetName) {
   })
   const sheet = google.sheets("v4")
 
-  const data = await sheet.spreadsheets.values.get({
-    spreadsheetId: authData.spreadsheetId,
-    range: `${sheetName}!A1:E100`,
-    auth,
-  });
-
+  let data = null;
+  try {
+    data = await sheet.spreadsheets.values.get({
+      spreadsheetId: authData.spreadsheetId,
+      range: `${sheetName}!A1:E100`,
+      auth,
+    });
+  } catch (e) {
+    console.log(`Invalid sheet: ${sheetName}`)
+  }
   return data;
 }

@@ -3,6 +3,7 @@ import './styles/App.scss';
 import { getSpendingData } from './sheets';
 import { Table } from './components/Table';
 import { MonthSelect } from './components/MonthSelect';
+import { MONTHS } from './common/constants';
 
 function App() {
   const [data, setData] = useState(null);
@@ -12,20 +13,7 @@ function App() {
     }
   }, [data]);
   const [currentMonth, setCurrentMonth] = useState("Sep");
-  const months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-  ].filter(month => data && data[month]);
+  const months = MONTHS.filter(month => data && data[month]);
 
   return (
     <div className="App">

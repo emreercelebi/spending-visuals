@@ -1,4 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import { MONTH_FULL_NAMES } from '../common/constants';
 import { ReactNode } from 'react';
 
 interface MonthSelectProps {
@@ -8,20 +9,7 @@ interface MonthSelectProps {
 }
 
 export function MonthSelect({ months, currentMonth, setCurrentMonth }: MonthSelectProps) {
-  const monthFullNames = new Map<String, String>([
-    ['Jan', 'January'],
-    ['Feb', 'February'],
-    ['Mar', 'March'],
-    ['Apr', 'April'],
-    ['May', 'May'],
-    ['Jun', 'June'],
-    ['Jul', 'July'],
-    ['Aug', 'August'],
-    ['Sep', 'September'],
-    ['Oct', 'October'],
-    ['Nov', 'November'],
-    ['Dec', 'December']
-  ]);
+  
   return (
     <div className="MonthSelect">
       <FormControl>
@@ -33,7 +21,7 @@ export function MonthSelect({ months, currentMonth, setCurrentMonth }: MonthSele
           label="Month"
           onChange={e => setCurrentMonth(e.target.value)}
         >
-          {months.map(month => <MenuItem value={month}>{monthFullNames.get(month)}</MenuItem>)}
+          {months.map(month => <MenuItem value={month}>{MONTH_FULL_NAMES.get(month)}</MenuItem>)}
         </Select>
       </FormControl>
     </div>
