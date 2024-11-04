@@ -12,7 +12,7 @@ function App() {
       getSpendingData().then(res => setData(res))
     }
   }, [data]);
-  const [currentMonth, setCurrentMonth] = useState("Sep");
+  const [currentMonth, setCurrentMonth] = useState(MONTHS[new Date().getMonth()]);
   const months = MONTHS.filter(month => data && data[month]);
 
   return (
