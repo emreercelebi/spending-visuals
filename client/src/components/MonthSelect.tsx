@@ -8,7 +8,11 @@ interface MonthSelectProps {
   setCurrentMonth: React.Dispatch<React.SetStateAction<string>>
 }
 
-export function MonthSelect({ months, currentMonth, setCurrentMonth }: MonthSelectProps) {
+export function MonthSelect({
+  months,
+  currentMonth,
+  setCurrentMonth
+}: Readonly<MonthSelectProps>) {
   
   return (
     <div className="MonthSelect">
